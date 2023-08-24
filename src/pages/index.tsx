@@ -18,11 +18,14 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const classes = await getClasses()
-  const facilities = await getFacilities()
-  const instructors = await getInstructors()
-  const locations = await getLocations()
-  const sports = await getSports()
+  const [classes, facilities, instructors, locations, sports] =
+    await Promise.all([
+      getClasses(),
+      getFacilities(),
+      getInstructors(),
+      getLocations(),
+      getSports(),
+    ])
 
   return {
     props: {
